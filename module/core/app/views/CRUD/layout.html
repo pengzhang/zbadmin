@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>#{get 'title' /}</title>
+	<meta name="keywords" content=""/>
+	<meta name="description" content=""/>
+	<link href="@@{'/public/crud/stylesheets/yeti.min.css'}" rel="stylesheet">
+	<link href="@@{'/public/crud/stylesheets/admin.css'}" rel="stylesheet">
+	<!-- fileupload -->
+	<link rel="stylesheet" href="/public/plugins/jQuery_File_Upload/css/style.css">
+	<link rel="stylesheet" href="/public/plugins/jQuery_File_Upload/css/jquery.fileupload.css">
+	<!-- simditor -->
+	<link rel="stylesheet"  href="/public/plugins/simditor/simditor.css">
+	<link rel="stylesheet"  href="/public/plugins/simditor/simditor-html.css"> 
+	#{get 'moreStyles' /}
+	
+</head>
+
+<body>
+	#{include '/CRUD/nav.html'/}
+	#{include '/CRUD/sidebar.html'/}
+	
+	#{if request.actionMethod != 'index'}
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2" >			
+		#{crud.navigation /}
+	</div>
+	#{/if}
+	
+	#{if flash.success}
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2" >	
+		<div class="row">
+			<div class="col-lg-12">
+		        <div class="alert alert-success alert-dismissible" role="alert" style="margin-top: 20px; margin-bottom:0px;">
+			        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			        	<span aria-hidden="true">&times;</span>
+			        </button>
+		            ${flash.success}
+		       </div>
+	       </div>
+       </div>
+    </div>
+	#{/if}
+	
+	#{if flash.error || error}
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">
+	    <div class="row">	
+	    	<div class="col-lg-12">
+		        <div class="alert alert-danger alert-dismissible" role="alert" style="margin-top: 20px; margin-bottom:0px;">
+			         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			         	<span aria-hidden="true">&times;</span>
+			         </button>
+			         ${error ?: flash.error}
+		        </div>
+	        </div>
+        </div>
+    </div>
+	#{/if}
+
+	#{doLayout /}
+
+	<script src="@@{'/public/crud/javascripts/jquery.min.js'}"></script>
+	<script src="@@{'/public/crud/javascripts/bootstrap.min.js'}"></script>
+	<script src="@@{'/public/crud/javascripts/bootstrap-datepicker.min.js'}"></script>
+	<!-- fileupload -->
+	<script type="text/javascript" src="/public/plugins/JavaScript_Load_Image/js/load-image.all.min.js"></script>
+	<script type="text/javascript" src="/public/plugins/JavaScript_Canvas_to_Blob/js/canvas-to-blob.min.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/vendor/jquery.ui.widget.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.iframe-transport.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.fileupload.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.fileupload-process.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.fileupload-image.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.fileupload-audio.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.fileupload-video.js"></script>
+	<script type="text/javascript" src="/public/plugins/jQuery_File_Upload/js/jquery.fileupload-validate.js"></script>
+	<!-- simditor -->
+	<script type="text/javascript" src="/public/plugins/simditor/module.js"></script>
+	<script type="text/javascript" src="/public/plugins/simditor/hotkeys.js"></script>
+	<script type="text/javascript" src="/public/plugins/simditor/uploader.js"></script>
+	<script type="text/javascript" src="/public/plugins/simditor/simditor.js"></script>
+	<script type="text/javascript" src="/public/plugins/simditor/beautify-html.js"></script>
+	<script type="text/javascript" src="/public/plugins/simditor/simditor-html.js"></script>
+	<!-- Date -->
+	<script type="text/javascript" src="/public/plugins/My97DatePicker/WdatePicker.js"></script>
+	#{get 'moreScripts' /}
+	<script>
+		!function ($) {
+		    $(document).on("click","ul.nav li.parent > a > span.icon", function(){          
+		        $(this).find('em:first').toggleClass("glyphicon-minus");      
+		    }); 
+		    $(".sidebar span.icon").find('em:first').addClass("glyphicon-plus");
+		}(window.jQuery);
+
+		$(window).on('resize', function () {
+		  if ($(window).width() > 768) $('#sidebar-collapse').collapse('show')
+		})
+		$(window).on('resize', function () {
+		  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
+		})
+	</script>	
+</body>
+
+</html>
+

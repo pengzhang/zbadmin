@@ -1,0 +1,63 @@
+#{extends 'Secure/layout.html' /}
+#{set title:title /}
+<div class="main">
+  <div class="container">
+    <!-- BEGIN SIDEBAR & CONTENT -->
+    <div class="row margin-bottom-40">
+		<div id="login">
+			 <div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+					<h2>用户注册</h2><hr>
+					<div class="login-panel panel panel-default">
+						<div class="panel-body">
+						
+						    #{ifErrors}
+				               <div class="alert alert-danger alert-dismissible" role="alert">
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								  <ul>
+								   #{errors}
+								   	 <li>${error}</li>
+								   #{/errors}
+							      </ul>
+							   </div>
+							#{/ifErrors}
+							#{form @registerAction()}
+								<fieldset>
+									<div class="form-group">
+										<label for="username">&{'secure.username'} #{if flash.username_error}<span class="text-danger">[${flash.username_error}]</span>#{/if}</label>
+										<input type="text" name="username" class="form-control" id="username" value="${flash.username}" />
+									</div>
+									<div class="form-group">
+										<label for="password">&{'secure.password'}</label>
+										<input type="password" name="password" class="form-control" id="password" value="" />
+									</div>
+									<div class="form-group">
+										<label for="vcode">验证码: #{if flash.vcode_error}<span class="text-danger">[${flash.vcode_error}]</span>#{/if}</label>
+										<div class="form-inline">
+											<input type="text" name="vcode" class="form-control" id="vcode" value="" />
+											<img src="" id="captcha" width="80" height="30">
+										</div>
+									</div>
+									<div class="form-group">
+										<input type="submit" id="signup" class="btn btn-primary" value="注册" />
+									</div>
+								</fieldset>
+							#{/form}
+						</div>
+					</div>
+				</div><!-- /.col-->
+			</div><!-- /.row -->	
+		</div>
+	  </div>
+   </div>
+</div>
+#{set 'moreScripts'}
+<script>
+	$(function(){
+		$('#captcha').attr('src','/captcha?'+Math.random());
+		$('#captcha').click(function(){
+			$('#captcha').attr('src','/captcha?'+Math.random());
+		})
+	})
+</script>
+#{/set}

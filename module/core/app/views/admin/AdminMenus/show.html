@@ -1,0 +1,31 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">	
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="crudShow" class="${type.name}">
+			    <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					<div class="col-lg-12">
+					    #{form action:@save(object._key()), enctype:'multipart/form-data', role:'form'}
+					        #{crud.form /}
+					        <div class="form-group">
+						            <input type="submit" class="btn btn-primary" name="_save" value="&{'crud.save', type.modelName}" />
+					        </div>
+					    #{/form}
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+#{set 'moreScripts'}
+	<script type="text/javascript">
+		$(function(){
+			$("#object_controllerName").attr("readonly","readonly");
+		})
+	</script>
+#{/set}

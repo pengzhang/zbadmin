@@ -1,0 +1,32 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.list.title', type.name) /}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">	
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="crudList" class="${type.name}">
+			
+			    <h2 id="crudListTitle">&{'crud.list.title', type.name}</h2>
+			
+			    <div id="crudListSearch">
+			        #{crud.search /}
+			    </div>
+			
+			    <div id="crudListTable">
+			        #{crud.table fields:['id', 'permission_name','action','action_url','createDate', 'updateDate']}
+			         #{crud.custom 'createDate'}
+				        	${object.createDate.format('yyyy-MM-dd HH:mm:ss')}
+				     #{/crud.custom}
+				     #{crud.custom 'updateDate'}
+				        	${object.updateDate.format('yyyy-MM-dd HH:mm:ss')}
+				     #{/crud.custom}
+			        #{/crud.table}
+			    </div>
+			
+			    <div id="crudListPagination">
+			        #{crud.pagination /}
+			    </div>
+			    
+			</div>
+		</div>
+	</div>
+</div>

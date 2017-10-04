@@ -1,0 +1,11 @@
+<div class="form-group">
+	#{field 'object.' + _name}
+	    <label for="${field.id}">
+	        &{_name}
+	        #{ifError field.name}
+		        <span class="error text-danger">[${field.error.raw()}]</span>
+		    #{/ifError}
+	    </label>
+	    <input id="${field.id}" class="${field.errorClass} form-control" type="text" name="${field.name}" value="${_value?.format()}" size="10" onClick="WdatePicker()" />
+	#{/field}
+</div>

@@ -1,0 +1,24 @@
+<div class="panel panel-default">
+  <div class="panel-heading">搜索您想查找的内容</div>
+  <div class="panel-body">
+	#{form action:@list().remove('page'), method:'GET',class:'form', role:'form'}
+	    #{if _fields}
+	        <input type="hidden" name="searchFields" value="${_fields.toString().substring(1, _fields.toString().length()-1).replace(',', '')}" />
+	    #{/if}
+	    <div class="form-group">
+	   		 <input type="text" name="search" class="form-control" value="${params.search?.escape()?.raw()}" placeholder="关键词" /> 
+	    </div>
+	    <div class="form-group" id="search_form">
+		    <div class="searchbox" id="basic_searchbox"></div>
+			<div id="basic_searchbox_param"></div>
+			<input type="hidden" name="filter" id="filter">
+		</div>
+	    <div class="form-group">
+	   		 <input class="btn btn-info" type="submit" value="&{'crud.search'}" />
+	   		 #{if _caller.params.search}
+		        (<a href="@{list()}">&{'crud.list.totalSize', _caller.totalCount}</a>)
+		    #{/if}
+	    </div>
+	#{/form}
+	</div>
+</div>

@@ -1,0 +1,29 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'系统所有配置' /}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">	
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="crudList" class="allConifg">
+			
+			    <h2 id="crudListTitle">系统所有配置</h2>
+			
+			    <div id="crudListTable">
+			        <table class="table table-striped">
+			          <tr>
+			          	<th>设置字段</th>
+			          	<th>设置值</th>
+			          </tr>
+					  #{list items:list, as:'obj'}
+					  #{list items:obj, as:'item'}
+					   <tr>
+			          	<td>${item.key}</td>
+			          	<td>${item.value?item.value:'暂无设置'}</td>
+			           </tr>
+					  #{/list}
+					  #{/list}
+					</table>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

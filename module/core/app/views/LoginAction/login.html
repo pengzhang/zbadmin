@@ -1,0 +1,69 @@
+#{extends '/layout/main.html' /}
+#{set title:'登录' /}
+
+<div class="container">
+   <!-- BEGIN SIDEBAR & CONTENT -->
+   <div class="row margin-bottom-40">
+	<div id="login">
+		 <div class="row">
+			<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+				<h2>用户登录</h2><hr>
+				<div class="login-panel panel panel-default">
+					<div class="panel-body">
+						#{if flash.error}
+						<div class="alert alert-danger alert-dismissible" role="alert">
+								&{flash.error}
+						</div>
+						#{/if}
+						#{if flash.success}
+						<div class="alert alert-success alert-dismissible" role="alert">
+								&{flash.success}
+						</div>
+						#{/if}
+						#{form @loginAction()}
+							<fieldset>
+								<div class="form-group">
+									<label for="username">&{'mobile'}</label>
+									<input type="text" name="username" class="form-control" id="username" value="${flash.username}" />
+								</div>
+								<div class="form-group">
+									#{if isDev}
+								    	<p><span class="label label-warning">开发模式</span></p>
+								    	<img id="captcha" class="img-thumbnail" src="/captcha"> 
+								    #{/if}
+								    #{else}
+									<a id="sms" class="btn btn-info">发送验证码</a>
+									#{/else}
+								</div>
+								<div class="form-group">
+									<label for="vcode">&{'vcode'}</label>
+									<input type="text" name="vcode" class="form-control" id="vcode" value="" />
+									
+								</div>
+								<div class="form-group">
+									<input type="submit" id="signin" class="btn btn-primary" value="&{'secure.signin'}" />
+								</div>
+							</fieldset>
+						#{/form}
+					</div>
+				</div>
+			</div><!-- /.col-->
+		</div><!-- /.row -->	
+	</div>
+  </div>
+</div>
+
+#{set 'moreScripts'}
+<script>
+	$(function(){
+		$("#captcha").click(function(){
+			$(this).attr("src","/captcha?"+Math.random());
+		})
+		$("#sms").click(function(){
+			$alert("短信模式未实现")
+			console.log($("#username").val());
+		})
+	})
+</script>
+#{/set}
+   

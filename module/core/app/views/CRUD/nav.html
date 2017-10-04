@@ -1,0 +1,36 @@
+<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="@{CRUD.index()}"><span>&{'crud.title'}</span></a>
+			<ul class="nav navbar-nav">
+				<li #{if nav=='admin'}class="active"#{/if}><a href="/admin">控制台</a></li>
+		        <li #{if nav=='setting'}class="active"#{/if}><a href="/admin/adminsystemsetting">配置中心</a></li>
+		        <li #{if nav=='cache'}class="active"#{/if}><a href="/admin/cache/clear">清理缓存</a></li>
+		        <li #{if nav=='status'}class="active"#{/if}><a href="/admin/status">系统状态</a></li>
+		        <li #{if nav=='api'}class="active"#{/if}><a href="/admin/api/list">接口列表</a></li>
+		        #{crud.types}
+			        <li #{if nav=='todo'}class="active"#{/if}>
+				        #{if type.name=='AdminTodos'}
+				        	<a href="${type.blankAction}">有问题,点这里</a>
+				        #{/if}
+			        </li>
+		        #{/crud.types}
+		        <li><a href="javascript:;">当前版本:v1.0</a></li>
+		    </ul>
+			<ul class="user-menu">
+				<li class="dropdown pull-right">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-user"></span> 管理员:${session.get('username')} <span class="caret"></span></a>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="/admin/logout"><span class="glyphicon glyphicon-log-out"></span> 退出</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</div><!-- /.container-fluid -->
+</nav>

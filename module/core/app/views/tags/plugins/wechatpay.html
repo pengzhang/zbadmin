@@ -1,0 +1,49 @@
+<script type="text/javascript">
+	//调用微信JS api 支付
+	function jsApiCall(apiparams,return_url)
+	{
+		WeixinJSBridge.invoke(
+			'getBrandWCPayRequest',	
+			apiparams,
+			function(res){
+                switch(res.err_msg){
+                    case "get_brand_wcpay_request:ok":
+                        window.location.href=return_url;
+                        break;
+                    case "get_brand_wcpay_request:cancel":
+                        alert("您取消了付款");
+                        break;
+                    case "get_brand_wcpay_request:fail":
+                        alert("支付错误");
+                        break;
+                }
+			}
+		);
+	}
+	function callpay(out_trade_no,return_url)
+	{
+		if (typeof WeixinJSBridge == "undefined"){
+		    if( document.addEventListener ){
+		        document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+		    }else if (document.attachEvent){
+		        document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+		        document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+		    }
+		}else{
+			$.ajax({
+				url:'/jsapipay?out_trade_no='+out_trade_no,
+				type:'GET',
+				success:function(data){
+					if(data.status){
+						jsApiCall(data.data,return_url);
+					}else{
+						alert(data.message);
+					}
+				},
+				error: function(e){
+					console.log(e);
+				}
+			});
+		}
+	}
+</script>

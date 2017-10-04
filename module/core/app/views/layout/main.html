@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<title>#{get 'title' /}</title>
+    <!-- zui -->
+    <link href="/public/plugins/zui/css/zui.min.css" rel="stylesheet">
+    <link href="/public/layout/main.css" rel="stylesheet">
+    #{get 'moreStyles' /}
+  </head>
+  <body>
+   
+	#{doLayout /}
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="/public/crud/javascripts/jquery.min.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="/public/plugins/zui/js/zui.min.js"></script>
+    <script src="/public/plugins/layer/layer.js"></script>
+    #{get 'moreScripts' /}
+  </body>
+</html>

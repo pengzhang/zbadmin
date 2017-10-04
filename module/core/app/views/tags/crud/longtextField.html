@@ -1,0 +1,14 @@
+<div class="form-group">
+	#{field 'object.' +     _name}
+	    <label for="${field.id}">
+	        &{_name}
+	        #{ifError field.name}
+		        <span class="error text-danger">[${field.error.raw()}]</span>
+		    #{/ifError}
+	    </label>
+	    <textarea id="${field.id}" cols="48" rows="5" class="${field.errorClass} form-control" name="${field.name}">${params[field.name]?.escape()?.raw() ?: field.error?.message == 'validation.required' ? '' : _value?.escape()?.raw()}</textarea>
+	#{/field}
+</div>
+#{set 'script'}
+	#{plugins.simeditor editor:field.id/}
+#{/set}

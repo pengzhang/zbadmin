@@ -1,0 +1,112 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.title') /}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">			
+	<div class="row">
+		<ol class="breadcrumb">
+			<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
+			<li class="active">控制台</li>
+		</ol>
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<h1 class="page-header">控制台</h1>
+		</div>
+	</div><!--/.row-->
+       
+	<div class="row">
+		#{crud.types}
+		<div class="col-xs-6 col-md-4 col-lg-3">
+			<div class="panel panel-blue panel-widget ">
+				<div class="row no-padding">
+					<div class="col-sm-4 col-lg-4 widget-left">
+						<em class="glyphicon glyphicon-book glyphicon-l"></em>
+					</div>
+					<div class="col-sm-8 col-lg-8 widget-right">
+						<div class="large">${type.count(null,null,null)}</div>
+						<div class="text-muted">&{type.name}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		#{/crud.types}
+	</div><!--/.row-->
+	
+	<div class="row">
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">内存使用(${(sys.get('memory').get('max')/1024/1024).format('0.0')} MB)</div>
+				<div class="panel-body" style="height:180px">
+					<div class="canvas-wrapper">
+						<input id="mem-free" type="hidden" value="${sys.get('memory').get('free')}" />
+						<input id="mem-total" type="hidden" value="${sys.get('memory').get('total')}" />
+						<canvas class="main-chart" id="mem-pie-chart" style="max-height:160px; padding:10px 0;"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">系统运行时间</div>
+				<div class="panel-body" style="height:180px;    text-align: center;  padding-top: 50px;">
+					<span style="font-size:50px; text-align:center">${(sys.get('application').get('uptime')/1000/60/60).format('0.0')}小时</span>
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<div class="panel panel-default">
+				<div class="panel-heading">系统参数</div>
+				<div class="panel-body" style="height:180px; ">
+					<table class="table">
+						<tr>
+							<td style="border:none;">Java版本</td>
+							<td style="border:none;">${sys.get('java').get('version')}</td>
+						</tr>
+						<tr>
+							<td>系统存储位置</td>
+							<td>${sys.get('application').get('path')}</td>
+						</tr>
+						<tr>
+							<td>线程池</td>
+							<td>${sys.get('pool').get('size')}</td>
+						</tr>
+						<tr class="visible-lg">
+							<td>活动的线程</td>
+							<td>${sys.get('pool').get('active')}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">最近15天访问趋势</div>
+				<div class="panel-body">
+					<div class="canvas-wrapper">
+						<input type="hidden" id="chart_data_title" value="${access.get('title')}">
+						<input type="hidden" id="chart_data_content" value="${access.get('data')}">
+						<canvas class="main-chart" id="line-chart" height="200" width="600"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div><!--/.row-->
+	
+	<div class="attribution">
+	<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1261165595'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1261165595%26online%3D1%26show%3Dline' type='text/javascript'%3E%3C/script%3E"));</script>
+	<p>Copyright &copy; 2015. All Rights Reserved by <a href="http://open.hm55.cn">open.hm55.cn</a>.</p>
+	</div>
+</div>	<!--/.main-->
+
+#{set 'moreScripts'}
+	<script src="/public/crud/javascripts/chart/chart.min.js"></script>
+	<script src="/public/crud/javascripts/chart/chart-data.js"></script>
+	<script src="/public/crud/javascripts/easypiechart/easypiechart.js"></script>
+	<script src="/public/crud/javascripts/easypiechart/easypiechart-data.js"></script>\
+#{/set}

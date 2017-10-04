@@ -1,0 +1,17 @@
+# Routes for the CRUD module
+# ~~~~~~~~~~~
+
+#{crud.types}
+GET			/admin/?											${type.controllerClass.name.substring(12).replace('$','')}.index
+GET			/admin/${type.controllerName}						${type.controllerClass.name.substring(12).replace('$','')}.list
+GET			/admin/${type.controllerName}/new					${type.controllerClass.name.substring(12).replace('$','')}.blank
+GET			/admin/${type.controllerName}/{id}					${type.controllerClass.name.substring(12).replace('$','')}.show
+GET			/admin/${type.controllerName}/{id}/{field}			${type.controllerClass.name.substring(12).replace('$','')}.attachment
+GET			/admin/${type.controllerName}/{id}/edit				${type.controllerClass.name.substring(12).replace('$','')}.edit
+POST		/admin/${type.controllerName}						${type.controllerClass.name.substring(12).replace('$','')}.create
+POST		/admin/${type.controllerName}/{id}					${type.controllerClass.name.substring(12).replace('$','')}.save
+DELETE		/admin/${type.controllerName}/{id}					${type.controllerClass.name.substring(12).replace('$','')}.delete
+DELETE		/admin/${type.controllerName}/remove/{id}			${type.controllerClass.name.substring(12).replace('$','')}.remove
+DELETE		/admin/${type.controllerName}/resume/{id}			${type.controllerClass.name.substring(12).replace('$','')}.resume
+#{/crud.types}
+GET			/admin												CRUD.index

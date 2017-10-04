@@ -1,0 +1,28 @@
+<div class="form-group">
+     #{field 'object.' + _name}
+	     <label for="${field.id}">
+		        &{_name}
+		         #{ifError field.name}
+			        <span class="error text-danger">[${field.error.raw()}]</span>
+			    #{/ifError}
+		  </label>
+		  <input id="${field.id}" class="${field.errorClass}" type="hidden" name="${field.name}" value="${params[field.name]?.escape()?.raw() ?: field.error?.message == 'validation.required' ? '' : _value?.escape()?.raw()}" size="50" />
+	      <br>
+	      <div class="row">
+		      <div class="col-lg-12">
+			      <span class="btn btn-success fileinput-button">
+				      <i class="glyphicon glyphicon-plus"></i>
+				      <span>添加文件</span>
+				      <input id="${field.id}_fileupload" type="file" name="file" multiple>
+				  </span>
+	          </div>
+	      </div>
+		 <br>
+		 <div class="row">
+		 	<div id="${field.id}_files" class="${field.id}_files col-lg-12"></div>
+		 </div>
+	 #{/field}
+</div>
+#{set 'script'}
+#{plugins.fileupload image:field.id,urls:_value/}
+#{/set}

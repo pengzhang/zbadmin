@@ -1,0 +1,11 @@
+<div class="form-group">
+	#{field 'object.' + _name}
+	    <label for="${field.id}">
+	        &{_name}
+	        #{ifError field.name}
+		        <span class="error text-danger">[${field.error.raw()}]</span>
+		    #{/ifError}
+	    </label>
+	    <input id="${field.id}" type="text" class="form-control" name="${field.name}" value="${params[field.name]?.escape()?.raw() ?: field.error?.message == 'validation.required' ? '' : _value?.escape()?.raw()}" size="5" />
+	#{/field}
+</div>

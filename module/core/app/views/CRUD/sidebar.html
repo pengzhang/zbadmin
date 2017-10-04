@@ -1,0 +1,16 @@
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+	<form role="search" action="/admin/search">
+		<div class="form-group">
+			<input type="text" class="form-control" name="q" placeholder="暂时这里不支持搜索">
+		</div>
+	</form>
+	<ul class="nav menu" style="margin-bottom:50px;">
+		#{crud.types}
+			<li #{if type.name==menu}class="active"#{/if}>
+				<a href="${type.listAction}">
+					<span class="glyphicon glyphicon-dashboard"></span> &{type.name}
+				</a>
+			</li>
+		#{/crud.types}
+	</ul>
+</div><!--/.sidebar-->

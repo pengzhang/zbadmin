@@ -1,0 +1,72 @@
+<!-- # {pagination action:xx,total:xx,page:xx,size:xx,limit:xx /}-->
+%{
+ size = (_size != null ? _size : 10)
+ nbPages = _total.page(size)
+ }%
+
+<nav align="center">
+#{if nbPages > 1}
+    <ul class="pager">
+        %{
+            limit = (_limit != null ? _limit : 10)
+            start = _page - (int)(limit/2) + (limit % 2 ? 0 : 1)
+            end = _page + (int)(limit/2)
+
+            if(start < 1){
+                extra = 1 - start
+                end = (end + extra < nbPages ? end + extra : nbPages)
+                start = 1
+            }else if(end > nbPages){
+                extra = end - nbPages
+                start = (start - extra > 1 ? start - extra : 1)
+                end = nbPages
+            }
+        }%
+
+        #{if _page > 1}
+        	<li>
+	            <span class="previous">
+	                #{a _action.add('page', _page-1).add('size', size)}&{'crud.pagination.previous'}#{/a}
+	            </span>
+            </li>
+        #{/if}
+
+        #{if start > 1}
+        	<li>
+	            <span class="first">
+	                #{a _action.add('page', 1).add('size', size)}&{'crud.pagination.first'}#{/a}
+	            </span>
+            </li>
+        #{/if}
+
+        %{ for (i in start..end) { }%
+        	<li #{if _page == i}class="active"#{/if}>
+	            <span class="page">
+	                #{if _page == i}
+	                    ${i}
+	                #{/if}
+	                #{else}
+	                    #{a _action.add('page', i).add('size', size)}${i}#{/a}
+	                #{/else}
+	            </span>
+            </li>
+        %{ } }%
+
+        #{if end < nbPages}
+        	<li>
+	            <span class="last">
+	                #{a _action.add('page', nbPages).add('size', size)}&{'crud.pagination.last'}#{/a}
+	            </span>
+            </li>
+        #{/if}
+
+        #{if _page < nbPages}
+        	<li>
+	            <span class="next">
+	                #{a _action.add('page', _page+1).add('size', size)}&{'crud.pagination.next'}#{/a}
+	            </span>
+            </li>
+        #{/if}
+    </ul>
+#{/if}
+</nav>

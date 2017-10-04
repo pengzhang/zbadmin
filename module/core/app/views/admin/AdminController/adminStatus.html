@@ -1,0 +1,20 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:'系统状态' /}
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">	
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="crudList" class="allConifg">
+			
+			    <h2 id="crudListTitle">系统状态</h2>
+			
+			    <div id="crudListTable">
+			    <table class="table table-striped">
+			        #{list items:status, as:'item'}
+			        	<tr><td>${item}</td></tr>
+			        #{/list}
+			    </table>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>

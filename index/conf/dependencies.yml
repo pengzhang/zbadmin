@@ -1,0 +1,12 @@
+# Application dependencies
+
+require:
+    - play
+    - core -> core latest.integration
+    
+repositories:
+    - HM55Modules:
+        type: local  
+        artifact: "${application.path}/../module/[module]"  
+        contains:
+            - core

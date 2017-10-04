@@ -1,0 +1,44 @@
+#{extends 'CRUD/layout.html' /}
+#{set title:messages.get('crud.show.title', type.modelName) /}
+
+<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2">	
+	<div class="row">
+		<div class="col-lg-12">
+			<div id="crudShow" class="${type.name}">
+			    <h2 id="crudShowTitle">&{'crud.show.title', type.modelName}</h2>
+				<div class="panel panel-default">
+				  <div class="panel-body">
+					<div class="col-lg-12">
+					    #{form action:@save(object._key()), enctype:'multipart/form-data', role:'form'}
+					        #{crud.form /}
+					        <div class="form-group">
+						            <input type="submit" class="btn btn-primary" name="_save" value="&{'crud.save', type.modelName}" />
+						            <input type="submit" class="btn btn-primary" name="_saveAndContinue" value="&{'crud.saveAndContinue', type.modelName}" />
+					        </div>
+					    #{/form}
+					    #{if object.status}
+							#{form @resume(object._key())}
+						     <div class="form-group">
+						            <input type="submit" class="btn btn-info" value="&{'crud.resume', type.modelName}" />
+						     </div>
+						    #{/form}
+					    #{/if}
+					    #{else}
+					    	#{form @remove(object._key())}
+						     <div class="form-group">
+						            <input type="submit" class="btn btn-warning" value="&{'crud.remove', type.modelName}" />
+						     </div>
+						    #{/form}
+					    #{/else}
+					    #{form @delete(object._key())}
+					     <div class="form-group">
+					            <input type="submit" class="btn btn-danger" value="&{'crud.delete', type.modelName}" />
+					     </div>
+					    #{/form}
+				    </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
